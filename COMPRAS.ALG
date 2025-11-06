@@ -50,7 +50,6 @@ Inicio
             senao
                  Escreval("Sendo assim você não recebeu nenhum desconto")
                  Escreval("Logo, sem nenhum desconto o valor continuou o mesmo: R$", valor)
-                 valor <- 0
             FimSe
             desconto <- valor - valorN
             Escreval("Uma diferença de: R$", desconto:5:2)
@@ -95,8 +94,6 @@ Inicio
                              senao
                                   Se (parcelas > 6) e (parcelas <= 12) entao
                                      valorP <- ((valor + (valor * 12) / 100) / parcelas)
-                                  senao
-                                       Escreval("SUA COMPRA FOI REALIZADA!")
                                   FimSe
                              FimSe
                         FimSe
@@ -109,17 +106,17 @@ Inicio
       OutroCaso
                Escreval("OPERAÇÃO CANCELADA, você digitou uma opção inexistente!")
       FimEscolha
-      Se (valorP >= 50) e (parcelas >= 1) e (parcelas <= 12) entao
-         Escreval("Gostaria de executar o pagamento? (sim ou não)")
-         Leia(finalizar)
-      FimSe
+      Escreval("Gostaria de executar o pagamento? (sim ou não)")
+      Leia(finalizar)
       Se (finalizar = "sim") entao
       Escreval("---------------------------------------------")
          Escreval("Obrigado por comprar conosco, ", nome, "!")
          Escreval("TRANSAÇÃO REALIZADA, COMPRA EFETUADA")
       senao
+           Se (finalizar = "não") entao
            Escreval("---------------------------------------------")
            Escreval("Que pena, ", nome, ". Agradecemos mesmo assim!")
            Escreval("TRANSAÇÃO CANCELADA, COMPRA NÃO FOI EFETUADA")
+           FimSe
       FimSe
 FimAlgoritmo
