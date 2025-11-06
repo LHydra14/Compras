@@ -1,103 +1,93 @@
 Algoritmo "Compras"
 Var
-   nome: caractere
+   nome, finalizar: caractere
    pagamento, parcelas: Inteiro
    valor, valorN, desconto, valorP: Real
 Inicio
-//Estrutura de escolha da forma de pagamento//
+//Estrutura de escolha da forma de pagamento
+      Escreval("SISTEMA DE PAGAMENTO")
+      Escreval("---------------------------------------------")
       Escreval("Qual seu nome?")
       Leia(nome)
       Escreval("---------------------------------------------")
-      Escreval("Qual será a forma de pagamento?")
+      Escreval("Bem vindo(a), ", nome)
+      Escreval("Qual o valor da sua compra? ")
+      Leia(valor)
+      Escreval("---------------------------------------------")
       Escreval("          [1] À VISTA          ")
       Escreval("          [2] CARTÃO DE CRÉDITO")
       Escreval("          [3] PARCELADO (ATÉ 12X)")
       Escreval("---------------------------------------------")
+      Escreval("Qual será a forma de pagamento? ")
       Leia(pagamento)
-      Escreval("Qual o valor da sua compra?")
-      Leia(valor)
-//Estrutura de condições em relação ao valor da compra//
-      Se (pagamento = 1) e (valor > 500) entao
-         valorN <- (valor - (valor * 15) / 100)
-         desconto <- (valor - valorN)
-         Escreval("---------------------------------------------------------")
-         Escreval("Ok, a forma de pagamento será à vista")
-         Escreval("Você recebeu um desconto de 15%")
-         Escreval(nome, ", o valor da sua compra é: R$", valor)
-         Escreval("Mas com o desconto de 15%, o valor ficou: R$", valorN:5:2)
-         Escreval("Uma diferença de: R$", desconto:5:2)
-         Escreval("---------------------------------------------------------")
-      senao
-         Se (pagamento = 1) e (valor <= 500) entao
-            valorN <- (valor - (valor * 10) / 100)
-            desconto <- (valor - valorN)
-            Escreval("------------------------------------------------------")
-            Escreval("Ok, a forma de pagamento será à vista")
-            Escreval("Você recebeu um desconto de 10%")
+//Caso o pagamento seja À Vista
+      Escolha pagamento
+      Caso 1
+           Escreval("---------------------------------------------")
+           Escreval("Ok, a forma de pagamento será À Vista!")
+           Escreval(nome, ", o valor da sua compra é: R$", valor)
+           Se (valor > 500) entao
+              valorN <- valor - (valor * 15) / 100
+              Escreval("Sendo assim você recebeu um desconto de 15%")
+              Escreval("Logo, com o desconto de 15%, o valor ficou: R$", valorN:5:2)
+           senao
+                valorN <- valor - (valor * 10) / 100
+                Escreval("Sendo assim você recebeu um desconto de 10%")
+                Escreval("Logo, com o desconto de 10%, o valor ficou: R$", valorN:5:2)
+           FimSe
+           desconto <- valor - valorN
+           Escreval("Uma diferença de: R$", desconto:5:2)
+           Escreval("---------------------------------------------")
+//Caso o pagamento seja no Cartão de Crédito
+      Caso 2
+            Escreval("---------------------------------------------")
+            Escreval("Ok, a forma de pagamento será no Cartão de Crédito!")
             Escreval(nome, ", o valor da sua compra é: R$", valor)
-            Escreval("Mas com o desconto de 10%, o valor ficou: R$", valorN:5:2)
-            Escreval("Uma diferença de: R$", desconto:5:2)
-            Escreval("------------------------------------------------------")
-         senao
-            Se (pagamento = 2) e (valor  > 1000) entao
-               valorN <- (valor - (valor * 5) / 100)
-               desconto <- (valor - valorN)
-               Escreval("---------------------------------------------------")
-               Escreval("Ok, a forma de pagamento será no cartao de crédito")
-               Escreval("Você recebeu um desconto de 5%")
-               Escreval(nome, ", o valor da sua compra é: R$", valor)
-               Escreval("Mas com o desconto de 5%, o valor ficou: R$", valorN:5:2)
-               Escreval("Uma diferença de: R$", desconto:5:2)
-               Escreval("---------------------------------------------------")
+            Se (valor > 1000) entao
+               valorN <- valor - (valor * 5) / 100
+               Escreval("Sendo assim você recebeu um desconto de 5%")
+               Escreval("Logo, com o desconto de 5%, o valor ficou: R$", valorN:5:2)
             senao
-               Se (pagamento = 2) e (valor <= 1000) entao
-                  Escreval("------------------------------------------------")
-                  Escreval("Ok, a forma de pagamento será no cartao de crédito")
-                  Escreval("Você não recebeu nenhum desconto!")
-                  Escreval(nome, ", o valor da sua compra é: R$", valor)
-                  Escreval("Como não tem nenhum desconto, o valor ficou: R$", valor)
-                  Escreval("------------------------------------------------")
-               senao
-                     Escreval("---------------------------------------------")
-                     Escreval("Ok, a forma de pagamento será parcelada")
-                     Escreval("Quantas parcelas você gostaria?")
-                     Escreval("---------------------------------------------")
-                     Leia(parcelas)
-               FimSe
+                 Escreval("Sendo assim você não recebeu nenhum desconto")
+                 Escreval("Logo, sem nenhum desconto o valor continuou o mesmo: R$", valor)
+                 valor <- 0
             FimSe
-         FimSe
-      FimSe
-//Estrutura de condições para diferentes parcelamentos//
-               Se (parcelas >= 1) e (parcelas <= 3) entao
-                  Escreval("------------------------------------------------")
-                  Escreval("Você não irá pagar nenhum juros!")
-                  valorP <- (valor / parcelas)
-                  Escreval("Você irá pagar o valor de: R$", valorP:5:2, " em ", parcelas, " vezes.")
-                  Escreval("------------------------------------------------")
-               Senao
-                    Se (parcelas >= 4) e (parcelas <= 6) entao
-                        Escreval("Você teve um acréscimo de 5%")
-                        valorP <- ((valor + (valor * 5) / 100) / parcelas)
-                        Escreval("Você irá pagar o valor de: R$", valorP:5:2, " em ", parcelas, " vezes.")
+            desconto <- valor - valorN
+            Escreval("Uma diferença de: R$", desconto:5:2)
+            Escreval("---------------------------------------------")
+//Caso o pagamento seja Parcelado (Até 12x)
+      Caso 3
+           Escreval("---------------------------------------------")
+           Escreval("Ok, a forma de pagamento será Parcelada!")
+           Escreval(nome, ", o valor da sua compra é: R$", valor)
+           Escreval("Quantas parcelas você gostaria? ")
+           Leia(parcelas)
+                    Se (parcelas >= 1) e (parcelas <= 3) entao
+                       valorP <- (valor / parcelas)
+                       Escreval("---------------------------------------------")
+                       Escreval("Parcelando em ", parcelas, " vezes, você não terá juros!")
                     senao
-                         Se (parcelas > 6) e (parcelas <= 12) entao
-                           Escreval("você teve um acréscimo de 12%")
-                           valorP <- ((valor + (valor * 12) / 100) / parcelas)
-                           Escreval("Você irá pagar o valor de: R$", valorP:5:2, " em ", parcelas, " vezes.")
+                         Se (parcelas > 3) e (parcelas <= 6) entao
+                            valorP <- (valor + (valor * 5) / 100) / parcelas
+                            Escreval("---------------------------------------------")
+                            Escreval("Parcelando em ", parcelas, " vezes, você terá juros de 5%!")
                          senao
-                              Se (parcelas > 12) entao
-                                 Escreval("Só é possível parcelar em até 12 vezes")
+                              Se (parcelas > 6) e (parcelas <= 12) entao
+                                 valorP <- (valor + (valor * 12) / 100) / parcelas
+                                 Escreval("---------------------------------------------")
+                                 Escreval("Parcelando em ", parcelas, " vezes, você terá juros de 12%!")
                               FimSe
                          FimSe
                     FimSe
-               FimSe
-//Caso o valor da parcela fique abaixo de R$50 a operação deve ser cancelada//
-               Enquanto (valorP < 50) e (parcelas < 12) faca
-                        Escreval("------------------------------------------")
-                        Escreval("TRANSAÇÃO CANCELADA, o valor da parcela ficou abaixo de R$50")
-                        Escreval("Qual o novo parcelamento")
-                        Leia(parcelas)
-                        Se (parcelas >= 1) e (parcelas <= 3) entao
+//Caso a parcela seja um valor inválido ou o valor da parcela seja menor que 50
+           Enquanto (parcelas < 1) ou (parcelas > 12) ou (valorP < 50) faca
+                    Escreval("---------------------------------------------")
+                    Escreval("Você não pode parcelar em ", parcelas, " vezes.")
+                    Escreval("A parcela tem que ser pelo menos 1 vez e em até 12 vezes")
+                    Escreval("E o valor da parcela tem que ser no mínimo R$50")
+                    Escreval("Sabendo disso em quantas vezes gostaria de parcelar?")
+                    Leia(parcelas)
+                    Se (parcelas >= 1) e (parcelas <= 3) entao
                            valorP <- (valor / parcelas)
                         senao
                              Se (parcelas >= 4) e (parcelas <= 6) entao
@@ -110,6 +100,26 @@ Inicio
                                   FimSe
                              FimSe
                         FimSe
-               FimEnquanto
-
+           FimEnquanto
+//Final de todos os casos
+           Escreval("Você irá pagar o valor de ", valor:5:2, " em ", parcelas, " vezes.")
+           Escreval("O valor da parcela será de: R$", valorP:5:2, " em ", parcelas, " vezes.")
+           Escreval("---------------------------------------------")
+//Caso nenhuma das opções seja escolhida
+      OutroCaso
+               Escreval("OPERAÇÃO CANCELADA, você digitou uma opção inexistente!")
+      FimEscolha
+      Se (valorP >= 50) e (parcelas >= 1) e (parcelas <= 12) entao
+         Escreval("Gostaria de executar o pagamento? (sim ou não)")
+         Leia(finalizar)
+      FimSe
+      Se (finalizar = "sim") entao
+      Escreval("---------------------------------------------")
+         Escreval("Obrigado por comprar conosco, ", nome, "!")
+         Escreval("TRANSAÇÃO REALIZADA, COMPRA EFETUADA")
+      senao
+           Escreval("---------------------------------------------")
+           Escreval("Que pena, ", nome, ". Agradecemos mesmo assim!")
+           Escreval("TRANSAÇÃO CANCELADA, COMPRA NÃO FOI EFETUADA")
+      FimSe
 FimAlgoritmo
