@@ -47,11 +47,13 @@ Inicio
                valorN <- valor - (valor * 5) / 100
                Escreval("Sendo assim você recebeu um desconto de 5%")
                Escreval("Logo, com o desconto de 5%, o valor ficou: R$", valorN:5:2)
+               desconto <- valor - valorN
             senao
                  Escreval("Sendo assim você não recebeu nenhum desconto")
                  Escreval("Logo, sem nenhum desconto o valor continuou o mesmo: R$", valor)
+                 valorN <- valor
+                 desconto <- 0
             FimSe
-            desconto <- valor - valorN
             Escreval("Uma diferença de: R$", desconto:5:2)
             Escreval("---------------------------------------------")
 //Caso o pagamento seja Parcelado (Até 12x)
@@ -100,7 +102,7 @@ Inicio
            FimEnquanto
 //Final de todos os casos
            Escreval("Você irá pagar o valor de ", valor:5:2, " em ", parcelas, " vezes.")
-           Escreval("O valor da parcela será de: R$", valorP:5:2, " em ", parcelas, " vezes.")
+           Escreval("O valor da parcela será de: R$", valorP:5:2, " em ", parcelas, " vezes!")
            Escreval("---------------------------------------------")
 //Caso nenhuma das opções seja escolhida
       OutroCaso
@@ -113,10 +115,8 @@ Inicio
          Escreval("Obrigado por comprar conosco, ", nome, "!")
          Escreval("TRANSAÇÃO REALIZADA, COMPRA EFETUADA")
       senao
-           Se (finalizar = "não") entao
            Escreval("---------------------------------------------")
            Escreval("Que pena, ", nome, ". Agradecemos mesmo assim!")
            Escreval("TRANSAÇÃO CANCELADA, COMPRA NÃO FOI EFETUADA")
-           FimSe
       FimSe
 FimAlgoritmo
