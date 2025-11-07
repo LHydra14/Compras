@@ -101,7 +101,6 @@ Inicio
                         FimSe
            FimEnquanto
 //Final de todos os casos
-           Escreval("Você irá pagar o valor de ", valor:5:2, " em ", parcelas, " vezes.")
            Escreval("O valor da parcela será de: R$", valorP:5:2, " em ", parcelas, " vezes!")
            Escreval("---------------------------------------------")
 //Caso nenhuma das opções seja escolhida
